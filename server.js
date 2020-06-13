@@ -1,12 +1,11 @@
 const express = require("express");
 const logger = require("morgan");
-// const mongojs = require("mongojs");
 const mongoose = require("mongoose");
 const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
-const User = require("./seeders/seed.js");
+const User = require("./models.js");
 const app = express();
 
 app.use(logger("dev"));
@@ -16,7 +15,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userdb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout");
 
 
 
