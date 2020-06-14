@@ -5,7 +5,7 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
-const db = require("./models");
+const db = require("./models/modelIndex.js");
 
 const app = express();
 
@@ -16,8 +16,8 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout");
 
-require("./routes/apiRoutes.js")(app);
-require("./routes/htmlRoutes.js")(app);
+// require("./routes/apiRoutes.js")(app);
+// require("./routes/htmlRoutes.js")(app);
 
 
 app.listen(PORT, () => {

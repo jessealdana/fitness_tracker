@@ -1,19 +1,8 @@
-var db = req("./models");
+const db = require("../models/modelIndex.js");
+const express = require("express");
+const app = express();
 
-  
-app.get("/populatedworkout", (req, res) => {
-    db.workout.find({})
-    .populate("exercises")
-    .then(dbworkout => {
-      res.json(dbworkout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-
-  });
-
-app.get("/exercises", (req, res) => {
+app.get("/exercise", (req, res) => {
     db.exercises.find({})
       .then(dbexercises => {
         res.json(dbexercises);
@@ -23,7 +12,7 @@ app.get("/exercises", (req, res) => {
       });
   });
   
-  app.get("/workout", (req, res) => {
+  app.get("/workouts", (req, res) => {
     db.workout.find({})
       .then(dbworkout => {
         res.json(dbworkout);
@@ -33,7 +22,7 @@ app.get("/exercises", (req, res) => {
       });
   });
   
-  app.post("/submit", ({ body }, res) => {
+  app.post("/exercise", ({ body }, res) => {
     db.exercises.create(body)
       .then(({ _id }) => db.workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
       .then(dbworkout => {
@@ -42,4 +31,16 @@ app.get("/exercises", (req, res) => {
       .catch(err => {
         res.json(err);
       });
+  });
+
+  app.get("/workouts/range", (req, res) => {
+    db.workout.find({})
+    .populate("exercises")
+    .then(dbworkout => {
+      res.json(dbworkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+
   });
