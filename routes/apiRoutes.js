@@ -1,5 +1,18 @@
 var db = req("./models");
 
+  
+app.get("/populatedworkout", (req, res) => {
+    db.workout.find({})
+    .populate("exercises")
+    .then(dbworkout => {
+      res.json(dbworkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+
+  });
+
 app.get("/exercises", (req, res) => {
     db.exercises.find({})
       .then(dbexercises => {
@@ -29,16 +42,4 @@ app.get("/exercises", (req, res) => {
       .catch(err => {
         res.json(err);
       });
-  });
-  
-  app.get("/populateduser", (req, res) => {
-    db.workout.find({})
-    .populate("exercises")
-    .then(dbworkout => {
-      res.json(dbworkout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-
   });
