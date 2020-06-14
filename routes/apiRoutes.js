@@ -1,46 +1,47 @@
-const db = require("../models/modelIndex.js");
-const express = require("express");
-const app = express();
+const db = require("../models/index.js");
+const router = require("express").Router();
 
-app.get("/exercise", (req, res) => {
-    db.exercises.find({})
-      .then(dbexercises => {
-        res.json(dbexercises);
+router.get("/exercise", (req, res) => {
+    db.Exercises.find({})
+      .then(dbExercises => {
+        res.json(dbExercises);
       })
       .catch(err => {
         res.json(err);
       });
   });
   
-  app.get("/workouts", (req, res) => {
-    db.workout.find({})
-      .then(dbworkout => {
-        res.json(dbworkout);
+  router.get("/workouts", (req, res) => {
+    db.Workout.find({})
+      .then(dbWorkout => {
+        res.json(dbWorkout);
       })
       .catch(err => {
         res.json(err);
       });
   });
   
-  app.post("/exercise", ({ body }, res) => {
-    db.exercises.create(body)
-      .then(({ _id }) => db.workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
-      .then(dbworkout => {
-        res.json(dbworkout);
+  router.post("/exercise", ({ body }, res) => {
+    db.Exercises.create(body)
+      .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { Exercises: _id } }, { new: true }))
+      .then(dbWorkout => {
+        res.json(dbWorkout);
       })
       .catch(err => {
         res.json(err);
       });
   });
 
-  app.get("/workouts/range", (req, res) => {
-    db.workout.find({})
-    .populate("exercises")
-    .then(dbworkout => {
-      res.json(dbworkout);
+  router.get("/workouts/range", (req, res) => {
+    db.Workout.find({})
+    .populate("Exercises")
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.json(err);
     });
 
   });
+
+  module.exports = router;

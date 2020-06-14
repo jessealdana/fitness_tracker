@@ -5,19 +5,23 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
-const db = require("./models/modelIndex.js");
-
+const db = require("./models/index.js");
+const apiRoutes = require("./routes/apiRoutes.js")
+const htmlRoutes = require("./routes/htmlRoutes.js");
 const app = express();
 
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(apiRoutes);
+app.use(htmlRoutes);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout");
 
-// require("./routes/apiRoutes.js")(app);
-// require("./routes/htmlRoutes.js")(app);
+
+
+
 
 
 app.listen(PORT, () => {
