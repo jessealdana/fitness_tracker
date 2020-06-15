@@ -24,6 +24,8 @@
 
  This app is run from the Heroku link: 
 
+ https://git.heroku.com/vast-eyrie-34582.git
+
 
 
  ## Usage
