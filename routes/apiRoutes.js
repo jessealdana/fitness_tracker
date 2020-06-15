@@ -35,6 +35,7 @@ const router = require("express").Router();
 
   router.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
+    .populate("exercises")
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
