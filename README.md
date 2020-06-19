@@ -12,6 +12,7 @@
  
 
  link to github repo: https://github.com/jessealdana/fitness_tracker
+ link to video demo: https://drive.google.com/file/d/1cRlN86zvu7xjBjX7Vn9lJBoIH3MpxwjM/view
  
  ## Table of Contents
   * [Installation](#Installation)
@@ -49,3 +50,5 @@ The user adds workouts by designating them either "cardio" or "resistance" and t
  Contact jessealdana at Github.
  
  ![Image of user](https://avatars0.githubusercontent.com/u/61436744?v=4)
+
+ ![About](/images/herokuLog.png)
